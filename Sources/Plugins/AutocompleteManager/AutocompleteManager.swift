@@ -387,14 +387,7 @@ open class AutocompleteManager: NSObject, InputPlugin, UITextViewDelegate, UITab
         tableView.superview?.layoutIfNeeded()
     }
     
-    // MARK: - UITextViewDelegate
-    
-    public func textViewDidChange(_ textView: UITextView) {
-        reloadData()
-    }
-    
-    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
+    public func customView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // Ensure that the text to be inserted is not using previous attributes
         preserveTypingAttributes()
         
@@ -469,6 +462,15 @@ open class AutocompleteManager: NSObject, InputPlugin, UITextViewDelegate, UITab
             }
         }
         return true
+    }
+    // MARK: - UITextViewDelegate
+    
+    public func textViewDidChange(_ textView: UITextView) {
+        reloadData()
+    }
+    
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return customView(textView, shouldChangeTextIn: range, replacementText: text)
     }
     
     // MARK: - UITableViewDataSource
