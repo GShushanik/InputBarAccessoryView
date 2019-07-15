@@ -135,7 +135,7 @@ open class AutocompleteManager: NSObject, InputPlugin, UITextViewDelegate, UITab
     }
     
     /// The current autocomplete text options filtered by the text after the prefix
-    private var currentAutocompleteOptions: [AutocompleteCompletion] {
+    public var currentAutocompleteOptions: [AutocompleteCompletion] {
         
         guard let session = currentSession, let completions = dataSource?.autocompleteManager(self, autocompleteSourceFor: session.prefix) else { return [] }
         guard !session.filter.isEmpty else { return completions }
